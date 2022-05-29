@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <!-- Include the CesiumJS JavaScript and CSS files -->
+  <script src="https://cesium.com/downloads/cesiumjs/releases/1.85/Build/Cesium/Cesium.js"></script>
+  <link href="https://cesium.com/downloads/cesiumjs/releases/1.85/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
+</head>
+<body>
+<div id="cesiumContainer"></div>
+<script>
+// Your access token can be found at: https://cesium.com/ion/tokens.
+// This is the default access token from your ion account
+
+Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI5ZjNjNDEyOS0yYTg2LTQ0ZjctYTE3My05NzBjZTMwYTg3ZDEiLCJpZCI6MzI2NTksInNjb3BlcyI6WyJhc3IiLCJnYyJdLCJpYXQiOjE1OTczMDQ2MTF9.W2kMnjB3m1lgOD3aHzCHryT0Svhj7Me4eWXwykT_JDA';
+
+// Initialize the Cesium Viewer in the HTML element with the `cesiumContainer` ID.
+const viewer = new Cesium.Viewer('cesiumContainer');    
+var polylines = new Cesium.PolylineCollection();
+console.log(viewer.scene,"viewer.scene");
+polylines.add({
+    id: `arrow_Polyline`,
+    positions: Cesium.Cartesian3.fromDegreesArray([-75, 35, -100, 35]),
+    width: 10,
+    clampToGround: true,
+    material: Cesium.Material.fromType('PolylineArrow', {
+      color: Cesium.Color.fromCssColorString('red')
+    })
+  });
+viewer.scene.primitives.add(polylines);
+
+viewer.entities.add({
+    polyline: {
+      positions: Cesium.Cartesian3.fromDegreesArray([-75, 36, -80, 36]),
+      width: 10,
+      clampToGround: true,
+      material: new Cesium.PolylineArrowMaterialProperty(Cesium.Color.fromCssColorString('red')),
+    }
+  })
+
+viewer.scene.screenSpaceCameraController.enableRotate = true;
+viewer.scene.screenSpaceCameraController.enableTranslate = true;
+
+    
+        
+
+
+  </script>
+ </div>
+</body>
+</html>
